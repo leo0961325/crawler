@@ -13,18 +13,47 @@ bs4 = BeautifulSoup(res.text , 'lxml')
 
 chosen = bs4.select('div.r-ent')
 
-#抓取網址
+#抓取網址#---------------------------------------------------------------------------
+url_list = []
+
+for url_list in chosen :
+    try :
+        url_list = url_list.select("a")[0]["href"]
+        combined = base_url + url_list
+        print(combined)
+    except IndexError :    #被刪除文章    解決方法1
+        print("文章被刪除")
+
+ #---------------------------------------------------------------------------
+
 url_list = []
 for url_list in chosen :
-    url_list = url_list.select("a")
-    if url_list :
+        url_list = url_list.select("a")
+        if url_list :
+            url_list = url_list[0]["href"]       #被刪除文章    解決方法2
+            combined = base_url + url_list
+            print(combined)
+        else :
+            pass
+
+#---------------------------------------------------------------------------
+
+url_list = []
+for url_list in chosen :
+        url_list = url_list.select("a")
+        if not url_list :       #被刪除文章    解決方法2
+            continue
         url_list = url_list[0]["href"]
         combined = base_url + url_list
         print(combined)
-    else : 
-        pass
+#---------------------------------------------------------------------------
 
-#抓取網址title 
+
+    
+        #抓取網址title 
 for title in chosen :
-    title_url = title.select(".title")[0].text
-    print(title_url)
+    title_url = title.select(".title")
+    if not title_url :
+        continue
+    title_url = title_url[0].text
+    print(title_url.strip()) # \n Del
