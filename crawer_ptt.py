@@ -16,9 +16,13 @@ chosen = bs4.select('div.r-ent')
 #抓取網址
 url_list = []
 for url_list in chosen :
-    url_list = url_list.select("a")[0]["href"]
-    combined = base_url + url_list
-    print(combined)
+    url_list = url_list.select("a")
+    if url_list :
+        url_list = url_list[0]["href"]
+        combined = base_url + url_list
+        print(combined)
+    else : 
+        pass
 
 #抓取網址title 
 for title in chosen :
