@@ -41,7 +41,7 @@ for url_list in chosen :
 url_list = []
 for url_list in chosen :
         url_list = url_list.select("a")
-        if not url_list :       #被刪除文章    解決方法2
+        if not url_list :       #被刪除文章    解決方法3
             continue
         url_list = url_list[0]["href"]
         combined = base_url + url_list
